@@ -23,7 +23,19 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Employee rows would be populated here -->
+                @for (item of employeeList; track $index) {
+                  <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{item.employeeName}}</td>
+                    <td>{{item.contactNo}}</td>
+                    <td>{{item.emailId}}</td>
+                    <td>{{item.deptId}}</td>
+                    <td>
+                      <button class="btn btn-success btn-sm" type="button" (click)="onEdit(item)">Edit</button>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="onDelete(item.employeeId)">Delete</button>
+                    </td>
+                  </tr>
+                }
                 <tr>
                   <td>1</td>
                   <td>John Doe</td>
@@ -54,15 +66,15 @@
           <form>
             <div class="mb-3">
               <label for="employeeName" class="form-label">Employee Name</label>
-              <input type="text" class="form-control" id="employeeName" placeholder="Enter employee name">
+              <input type="text" class="form-control" name="employeeName" [(ngModel)]="employeeObj.employeeName" id="employeeName" placeholder="Enter employee name">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter email">
+              <input type="email" class="form-control" name="emailId"  [(ngModel)]="employeeObj.emailId" id="email" placeholder="Enter email">
             </div>
             <div class="mb-3">
               <label for="contactNo" class="form-label">Contact No</label>
-              <input type="text" class="form-control" id="contactNo" placeholder="Enter contact number">
+              <input type="text" class="form-control"  name="contactNo"  [(ngModel)]="employeeObj.contactNo" id="contactNo" placeholder="Enter contact number">
             </div>
             <div class="mb-3">
               <label for="parentDept" class="form-label">Parent Department</label>
@@ -74,38 +86,36 @@
             </div>
             <div class="mb-3">
               <label for="childDept" class="form-label">Child Department</label>
-              <select class="form-select" id="childDept">
+              <select class="form-select" id="childDept" [(ngModel)]="employeeObj.deptId" name="deptId">
                 <option selected disabled>Select department</option>
                 @for (item of childDeptList; track $index) {
                   <option [value]="item.childDeptId">{{item.departmentName}}</option>}
               </select>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="role" class="form-label">Role</label>
               <input type="text" class="form-control" id="role" placeholder="Enter role">
-            </div>
+            </div> apparently not needed -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Enter password">
+              <input type="password" class="form-control" id="password" [(ngModel)]="employeeObj.password" name="password"  placeholder="Enter password">
             </div>
             <div class="mb-3">
-              <label class="form-label">Gender</label>
-              <div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="male" value="male">
-                  <label class="form-check-label" for="male">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                  <label class="form-check-label" for="female">Female</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="other" value="other">
-                  <label class="form-check-label" for="other">Other</label>
-                </div>
+
+              <label for="gender" class="form-label">Gender</label>
+              <div class="col-md-6">
+              <input type="radio" name="gender" value="Male" placeholder="Male" [(ngModel)]="employeeObj.gender">Male
+              <input type="radio" name="gender" value="Female" placeholder="female" [(ngModel)]="employeeObj.gender">Female
               </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            @if(employeeObj.employeeId ==0) {
+              <button type="submit" (click)="onSaveEmp()" class="btn btn-primary">Submit</button>
+            }@else {
+              <button type="submit" (click)="onUpdateEmp()" class="btn btn-primary">Update</button>
+            }
+
+
+
           </form>
         </div>
       </div>
