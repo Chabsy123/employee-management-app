@@ -16,6 +16,9 @@ import { ProjectEmployeesComponent } from '../project-employees/project-employee
   styleUrl: './project.component.css'
 })
 export class ProjectComponent implements OnInit {
+
+  projectEmployee: ProjectEmployee = new ProjectEmployee();
+
   @ViewChild("myModal")employeeModal: ElementRef | undefined;
   currentView: string = "List";
 
@@ -69,16 +72,25 @@ this.employeeModal.nativeElement.style.display = "block";
     this.currentView = "Create"
   }
 
-   onAddEmp(){
-    this.employeeService.addNewProjectEmployee(this.ProjectEmployee).subscribe((res:ProjectEmployee)=>{
-      debugger;
+  //  onAddEmp(){
+  //   this.employeeService.addNewProjectEmployee(this.ProjectEmployees).subscribe((res:ProjectEmployee)=>{
+  //     debugger;
+  //     alert("Employee Added to Project");
+  //     this.getAllProject(this.ProjectEmployees.projectId );
+  //   },error=>{
+
+
+  //   })
+  //  }
+  onAddEmp(){
+    this.employeeService.addNewProjectEmployee(this.projectEmployee).subscribe((res: ProjectEmployee) => {
       alert("Employee Added to Project");
-      this.getAllProject(this.ProjectEmployee.projectId );
-    },error=>{
+      this.getAllProject(); // Or getAllProjectEmployee(this.projectEmployee.projectId) if that was the intent
+    }, error => {
+      console.error("Failed to add employee to project", error);
+    });
+  }
 
-
-    })
-   }
   onSaveProject(){
     const formValue = this.projectForm.value;
     if(formValue.projectId == 0){

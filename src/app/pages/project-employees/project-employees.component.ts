@@ -10,6 +10,6 @@ export class ProjectEmployeesComponent {
 empId: any;
 role: any;
 assignedDate: any;
-  projectId: number;
+  projectId: number = 0;
 
 }
