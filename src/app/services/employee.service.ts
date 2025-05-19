@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employee, IApiResponse, Project } from '../model/Employee';
+import { Employee, IApiResponse, Project, ProjectEmployee } from '../model/Employee';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -30,9 +30,19 @@ createNewProject(obj:Project){
   return this.http.post<Project>(`${this.apiUrl}CreateProject`,obj)
 }
 
+updateProject(obj:Project){
+  return this.http.put<Project>(this.apiUrl +`/api/EmployeeManagement/UpdateProject/${obj.projectId}`,obj)
+}
+
 getProjects(){
   return this.http.get<Project[]>(this.apiUrl + "GetAllProjects")
 }
-
+addNewProjectEmployee(obj:ProjectEmployee){
+  return this.http.post<ProjectEmployee>(`${this.apiUrl}CreateProjectEmployee`, obj)
+}
+GetProjectEmployee(){
+  return this.http.get<Project[]>(this.apiUrl + "GetProjectEmployee/")
+}
 }
 
+//change links to proxy configuration type when you see this

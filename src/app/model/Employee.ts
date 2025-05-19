@@ -1,3 +1,5 @@
+
+import { ProjectEmployeesComponent } from './../pages/project-employees/project-employees.component';
 export class Employee{
 
     employeeId: number;
@@ -56,4 +58,24 @@ export interface Project {
   contatNo: string,
   emailId:string,
   employeeName: string
+}
+
+export class ProjectEmployee{
+  empProjectId: number;
+  projectId:number;
+  empId: number;
+  assignedDate: string;
+  role: string;
+  isActive: boolean;
+  projectName?: string;
+  employeeName?: string;
+
+  constructor(){
+    this.assignedDate= "";
+    this.empId=0;
+    this.empProjectId=0;
+    this.isActive= true;
+    this.projectId = 0;
+    this.role = "";
+  }
 }

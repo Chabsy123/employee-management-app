@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './project-employees.component.css'
 })
 export class ProjectEmployeesComponent {
+empId: any;
+role: any;
+assignedDate: any;
+  projectId: number;
 
 }
