@@ -45,3 +45,15 @@ export interface IApiResponse<T = any>{
      date:any;
 
 }
+
+export interface Project {
+  projectId: number,
+  projectName: string,
+  clientName: string,
+  startDate: string,
+  leadEmpById: number,
+  contactPerson: string,
+  contatNo: string,
+  emailId:string,
+  employeeName: string
+}
